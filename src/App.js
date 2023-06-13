@@ -1,101 +1,69 @@
 //Components
-import Header from "./components/Header"
-import Nav from "./components/Nav"
-
+import Home from "./pages/Home"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 //Images
-import Logo from "./img/Logo.svg"
 import footer_image from "./img/restaurant chef B.jpg"
 //CSS
 import "./App.css"
+import "./Typography.css"
+import Header from "./components/Header"
+import Booking from "./pages/Booking"
+import { useReducer, useState } from "react"
+import { fetchAPI } from "./api/api"
+import ConfirmedBooking from "./pages/ConfirmedBooking"
+import PageNotFound from "./pages/PageNotFound"
+const router = (availableTimes, dispatchAvailableTimes) => {
+  return createBrowserRouter([
+    {
+      element: <Header className="header-primary" />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/booking",
+          element: (
+            <Booking
+              availableTimes={availableTimes}
+              dispatchAvailableTimes={dispatchAvailableTimes}
+            />
+          ),
+        },
+        {
+          path: "/confirmedBooking/:date/:time/:guests/:occasion",
+          element: <ConfirmedBooking />
+        }, {
+          path: "*",
+          element: <PageNotFound />
+        }
+      ],
+    },
+  ])
+}
 
+function timeReducer(state, action) {
+  switch (action.type) {
+    case "change_date": {
+      const apiresult = fetchAPI(action.date)
+      console.log(apiresult)
+      return apiresult
+    }
+  }
+}
+
+//TODO: Develop the components based on the figma
 function App() {
+  const [availableTimes, dispatchAvailableTimes] = useReducer(timeReducer, [
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+  ])
   return (
-    <>
-      <Header className="header-primary">
-        <img src={Logo} />
-        <Nav className="navigation navigation-primary">
-          <ul>
-            <li>
-              <a href="/home">Home</a>
-            </li>
-            <li>
-              <a href="/about">About</a>
-            </li>
-            <li>
-              <a href="/menu">Menu</a>
-            </li>
-            <li>
-              <a href="/reservations">Reservations</a>
-            </li>
-            <li>
-              <a href="/order-online">Order Online</a>
-            </li>
-            <li>
-              <a href="/login">Login</a>
-            </li>
-          </ul>
-        </Nav>
-      </Header>
-      {/* <Main>
-        <Hero />
-        <Specials />
-        <Testimonials />
-        <About />
-      </Main> */}
-      {/* <Footer> */}
-      <footer className="footer">
-        <img src={footer_image}/>
-        <Nav className="navigation">
-          <ul>
-            <li>
-              <a href="/home">Home</a>
-            </li>
-            <li>
-              <a href="/about">About</a>
-            </li>
-            <li>
-              <a href="/menu">Menu</a>
-            </li>
-            <li>
-              <a href="/reservations">Reservations</a>
-            </li>
-            <li>
-              <a href="/order-online">Order Online</a>
-            </li>
-            <li>
-              <a href="/login">Login</a>
-            </li>
-          </ul>
-        </Nav>
-        <Nav className="navigation">
-          <ul>
-            <li>
-              <a href="/home">Home</a>
-            </li>
-            <li>
-              <a href="/about">About</a>
-            </li>
-            <li>
-              <a href="/menu">Menu</a>
-            </li>
-          </ul>
-        </Nav>
-        <Nav className="navigation">
-          <ul>
-            <li>
-              <a href="/home">Home</a>
-            </li>
-            <li>
-              <a href="/about">About</a>
-            </li>
-            <li>
-              <a href="/menu">Menu</a>
-            </li>
-          </ul>
-        </Nav>
-      </footer>
-      {/* </Footer> */}
-    </>
+    <RouterProvider router={router(availableTimes, dispatchAvailableTimes)} />
   )
 }
 

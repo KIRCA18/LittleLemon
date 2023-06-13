@@ -1,13 +1,19 @@
-.header-primary {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  flex-wrap: wrap;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+  line-height: 0.8;
 }
 
-.navigation a, a:visited, a:link {
+.navigation a,
+a:visited,
+a:link {
   text-decoration: none;
-  font-family: 'Karla';
+  font-family: "Karla";
   color: black;
   font-size: 1.25rem;
   font-weight: 500;
@@ -19,17 +25,203 @@
   flex-wrap: wrap;
 }
 
-.navigation li {
+.navigation ul {
+  padding: 0;
   list-style-type: none;
 }
 
 .footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  background-color: #495e57;
+  padding: 20px 0;
+  box-shadow: 0 0 0 100vmax #495e57;
+  clip-path: inset(0 -100vmax);
 }
 
 .footer img {
   aspect-ratio: 9/12;
   width: 200px;
   object-fit: cover;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  position: relative;
+}
+
+.fixed-wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+  width: 100%;
+}
+
+.content {
+  grid-column: 3 / 10;
+  padding: 20px 0;
+}
+
+.header-primary {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.header-primary a.active {
+  border-bottom: 5px solid #495e57;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.column-center {
+  align-items: center;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.center {
+  justify-content: center;
+}
+
+.full-background {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #495e57;
+  z-index: -1;
+}
+.center-row {
+  align-items: center;
+}
+
+.space-between {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.space-evenly {
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.hero-image {
+  position: relative;
+  width: 375px;
+  height: 420px !important;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: -40px;
+}
+
+.hero {
+  padding: 20px 0;
+}
+
+.specials-wrapper {
+  padding-top: 50px;
+}
+
+.special-food-wrapper {
+  background-color: #edefee;
+  border-radius: 16px 16px 0px 0px;
+  overflow: hidden;
+  flex: 1;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.special-food-wrapper > div {
+  height: 100%;
+}
+
+.special-food-wrapper > img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.testimonial-header {
+  display: flex;
+}
+
+.testimonial-header img {
+  width: 46px;
+  aspect-ratio: 1/1;
+}
+
+.testimonial {
+  background-color: white;
+  border-radius: 10px;
+  flex: 1;
+  align-items: stretch;
+  padding: 16px;
+}
+
+.call-to-action {
+  background-color: #f4ce14;
+  outline: none;
+  border: none;
+  width: 200px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.call-to-action:hover {
+  background-color: #ffd500;
+}
+
+.wrapper-404 {
+  top: 0;
+  position: absolute;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #495e57;
+}
+
+.shadow {
+  box-shadow: 0px 1px 13px 3px #495e57;
+}
+
+.booking {
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
+  min-width: 300px;
+  font-family: 'Karla';
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.booking input, select {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  outline: none;
+  border: 1px solid #495e57;
+  padding: 8px;
+  border-radius: 8px;
 }
